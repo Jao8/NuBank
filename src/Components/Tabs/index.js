@@ -1,11 +1,29 @@
 import React from "react";
+import { Animated } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import { Container, TabsContainer, TabsItem, TabsText } from "./styles";
 
-export default function Tabs() {
+export default function Tabs({ translateY }) {
   return (
-    <Container>
+    <Container
+      style={{
+        transform: [
+          {
+            translateY: translateY.interpolate({
+              inputRange: [0, 300],
+              outputRange: [0, 30],
+              extrapolate: "clamp",
+            }),
+          },
+        ],
+        opacity: translateY.interpolate({
+          inputRange: [0, 300],
+          outputRange: [1, 0.2],
+          extrapolate: "clamp",
+        }),
+      }}
+    >
       <TabsContainer>
         <TabsItem>
           <Icon name="attach-money" size={24} color="#FFF" />

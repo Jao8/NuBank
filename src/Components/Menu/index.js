@@ -1,5 +1,7 @@
+import { Animated } from "react-native";
 import React from "react";
 import QRCode from "react-native-qrcode-generator";
+
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import {
@@ -12,9 +14,16 @@ import {
   SignOutButtonText,
 } from "./styles";
 
-export default function Menu() {
+export default function Menu({ translateY }) {
   return (
-    <Container>
+    <Container
+      style={{
+        opacity: translateY.interpolate({
+          inputRange: [0, 150],
+          outputRange: [0, 1],
+        }),
+      }}
+    >
       <Qcode>
         <QRCode
           value={"https://nubank.com.br/en/"}
